@@ -35,8 +35,7 @@ endlocal & if "%~1" equ "" (echo(%PID%) else set "%~1=%PID%"
 exit /b
 
 :ShowWindow [pid]
-:: :: this mysterious line passes all arguments as $argv to the powershell script part
-diese geheimnisvolle Zeile übergibt alle argumente als $argv an den powershell script Teil
+:: this mysterious line passes all arguments as $argv to the powershell script part
 (for %%I in ("%~f0";%*) do @echo(%%~I) | powershell -noprofile "$argv = $input | ?{$_}; iex (${%~f0} | out-string)"
 goto:eof
 : end cmd / begin powershell #>
