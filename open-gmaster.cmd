@@ -22,7 +22,7 @@ goto:eof
 echo :doIt: %*
 setlocal 
 
-set path=C:\Users\srebe\AppData\Local\gmaster\bin;%path%
+set path=C:\Users\%USERNAME%\AppData\Local\gmaster\bin;%path%
 call start "" gmaster --path=%1
 
 goto:eof
@@ -47,6 +47,7 @@ $parentId = (Get-WmiObject Win32_Process | Where-Object { $_.ProcessId -eq $PID}
 $parentHandle = ((Get-Process -id $parentId)  | Select-Object MainWindowHandle).MainWindowHandle;
 
 Set-Variable SW_MINIMIZE -Option Constant -Value 6;
+Set-Variable SW_HIDE -Option Constant -Value 0;
 
 $signature = @'
 [DllImport("user32.dll")]
@@ -54,4 +55,4 @@ public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 '@
 $type = Add-Type -MemberDefinition $signature -Name ShowWindowName -Namespace ShowWindow -Using System.Text -PassThru
 
-$type::ShowWindow($parentHandle, $SW_MINIMIZE);
+$type::ShowWindow($parentHandle, $SW_HIDE);
