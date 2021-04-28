@@ -1,12 +1,5 @@
 param($dir = (Join-Path -Path $env:USERPROFILE -ChildPath 'Desktop'))
 
-&start winword
-
-$word = New-Object -ComObject "Word.Application"
-$word.Visible = $true
-&taskkill -im winword.exe
-Return
-
 $clp = Get-Clipboard;
 $dir | Out-Host
 $clp | Out-Host;
